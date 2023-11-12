@@ -1,0 +1,11 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "terraform.experimentalFeatures.validateOnSave": false,
+    "editor.formatOnSave": true,
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+    }
+}
