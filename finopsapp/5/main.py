@@ -29,12 +29,12 @@ def main() -> None:
         if has_tag_key(item.tags, "rex"):
             item.state, item.reason = State.FILTERED, Exception("TAG_KEY_FILTER")
             continue
+
+        err: DeleteResultType = item.delete()
+        if err:
+            item.state, item.reason = State.FAILED, err
         else:
-            err: DeleteResultType = item.delete()
-            if err:
-                item.state, item.reason = State.FAILED, err
-            else:
-                item.state = State.DELETED
+            item.state = State.DELETED
 
     for item in items:
         print(item)
