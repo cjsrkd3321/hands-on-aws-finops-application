@@ -18,6 +18,8 @@ class IAMRole(ResourceBase):
     def delete(self) -> DeleteResultType:
         try:
             self.svc.delete_role(RoleName=self.role["RoleName"])
+        except self.svc.exceptions.NoSuchEntityException:
+            return None
         except Exception as e:
             return e
         return None

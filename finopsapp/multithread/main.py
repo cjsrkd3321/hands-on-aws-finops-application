@@ -6,7 +6,7 @@ from items.item import Item, ItemBuilder
 from items.state import State
 
 
-ITEMS: dict[str, Item] = {}
+ITEMS: dict[str, list[Item]] = {}
 
 
 def lister(list_func, sess: Client, region: str) -> None:
@@ -15,8 +15,9 @@ def lister(list_func, sess: Client, region: str) -> None:
     if cache_key in ITEMS:
         return
 
+    ITEMS[cache_key] = []
     for result in list_func(sess):
-        ITEMS[cache_key] = (
+        ITEMS[cache_key].append(
             ItemBuilder()
             .set_resource(result)
             .set_region(region)
@@ -53,7 +54,9 @@ def main() -> None:
 
     threads.clear()
 
-    threads += [pool.submit(deleter, item) for item in ITEMS.values()]
+    threads += [
+        pool.submit(deleter, item) for items in ITEMS.values() for item in items
+    ]
     for future in futures.as_completed(threads):
         item, err = future.result()
         if err:
