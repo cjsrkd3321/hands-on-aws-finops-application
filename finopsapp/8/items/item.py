@@ -1,7 +1,7 @@
 from typing import Self
 
 from items.state import State
-from resources.base import ResourceBase, DeleteResultType, TagType
+from resources.base import ResourceBase, DeleteResultType, TagResultType
 from resources.utils import convert_dict_to_tags
 
 
@@ -17,7 +17,7 @@ class Item:
         return self.resource.delete()
 
     @property
-    def tags(self) -> list[TagType]:
+    def tags(self) -> TagResultType:
         return convert_dict_to_tags(self.resource.tags)
 
     def __str__(self) -> str:

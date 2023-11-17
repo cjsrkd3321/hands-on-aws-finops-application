@@ -1,13 +1,13 @@
 from boto3.session import Session
 
-from resources.base import LIST_FUNCS, DeleteResultType, TagType, Client
+from resources.base import LIST_FUNCS, DeleteResultType, TagResultType, Client
 from items.item import Item, ItemBuilder
 from items.state import State
 
 
-def has_tag_key(tags: list[TagType], key: str) -> bool:
+def has_tag_key(tags: TagResultType, key: str) -> bool:
     for tag in tags:
-        if tag["Key"] == key:
+        if tag["Key"] == key:  # type: ignore
             return True
     return False
 

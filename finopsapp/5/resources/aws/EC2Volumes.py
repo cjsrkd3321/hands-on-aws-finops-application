@@ -5,7 +5,7 @@ from mypy_boto3_ec2.type_defs import VolumeTypeDef
 from resources.base import (
     DeleteResultType,
     ListResultType,
-    TagType,
+    TagResultType,
     ResourceBase,
     LIST_FUNCS,
 )
@@ -24,7 +24,7 @@ class EC2Volume(ResourceBase):
         return None
 
     @property
-    def tags(self) -> list[TagType]:
+    def tags(self) -> TagResultType:
         return self.volume.get("Tags", [])
 
     def __str__(self) -> str | None:

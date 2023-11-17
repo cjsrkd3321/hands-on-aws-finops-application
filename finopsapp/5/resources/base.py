@@ -8,6 +8,7 @@ type DeleteResultType = Exception | None
 type ListResultType = Generator[ResourceBase | None, None, None]
 type ResourceType = Callable[[Session], Generator[ResourceBase | None, None, None]]
 type TagType = dict[str, str]
+type TagResultType = list[TagType | None]
 
 
 LIST_FUNCS: list[ResourceType] = []
@@ -23,7 +24,8 @@ class ResourceBase(metaclass=ABCMeta):
         pass
 
     @property
-    def tags(self) -> list[TagType]:  # type: ignore
+    @abstractmethod
+    def tags(self) -> TagResultType:
         pass
 
     @abstractmethod

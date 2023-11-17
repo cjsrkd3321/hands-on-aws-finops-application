@@ -4,7 +4,7 @@ from mypy_boto3_iam.type_defs import RoleTypeDef
 from resources.base import (
     DeleteResultType,
     ListResultType,
-    TagType,
+    TagResultType,
     ResourceBase,
     LIST_FUNCS,
 )
@@ -25,7 +25,7 @@ class IAMRole(ResourceBase):
         return None
 
     @property
-    def tags(self) -> list[TagType]:
+    def tags(self) -> TagResultType:
         return self.role.get("Tags", [])
 
     def __str__(self) -> str:
